@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"></script> 
+<script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+
+<div class="header">
+<div class="menuimage-info"><img src="images/logo-mono.png"></div>
+<div class="headersub">Area</div>
+</div>
+<div class="divider"></div>
+
+<div class="content">
+<form id="convert" oninput="updateOutput()">
+<div class="left">&#9654; <input class="box" name="value" type="number"></div>
+<div class="right">
+<select name="from" onchange="updateOutput()">
+<option value="0.0001">cm&#178;</option>
+<option value="1" selected="yes">m&#178;</option>
+<option value="4046.8564224047">acres</option>
+<option value="100">ares</option>
+<option value="10000">hectares</option>
+<option value="0.00064516">inches&#178;</option>
+<option value="0.09290304">feet&#178;</option>
+<option value="0.83612736">yards&#178;</option>
+<option value="2589988">miles&#178;</option>
+</select></div>
+<br>
+
+<div class="left">= <input class="box2" name="result" type="text"></div>
+
+<div class="right"><select name="to" onchange="updateOutput()">
+<option value="0.0001">cm&#178;</option>
+<option value="1">m&#178;</option>
+<option value="4046.8564224047">acres</option>
+<option value="100">ares</option>
+<option value="10000" selected="yes">hectares</option>
+<option value="0.00064516">inches&#178;</option>
+<option value="0.09290304">feet&#178;</option>
+<option value="0.83612736">yards&#178;</option>
+<option value="2589988">miles&#178;</option>
+</select></div>
+<div style="clear:both;">
+<div class="left">Thousand Separator</div>
+<div class="right"><input type="checkbox" id="separator" onchange="updateOutput()" checked></div>
+</div>
+<div class="left">Limit Decimals</div>
+<div class="right">
+<select name="decimals" onchange="updateOutput()">
+<option value="0">rounded</option>
+<option value="2" selected="yes">2</option>
+<option value="4">4</option>
+<option value="unlimited">unlimited</option>
+</select>
+</div>
+</form>
+</div>
+
+</body>
+</html>

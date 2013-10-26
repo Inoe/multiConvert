@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"></script> 
+<script type="text/javascript" src="script.js"></script>
+</head>
+<body>
+
+<div class="header">
+<div class="menuimage-info"><img src="images/logo-mono.png"></div>
+<div class="headersub">Length</div>
+</div>
+<div class="divider"></div>
+
+<div class="content">
+<form id="convert" oninput="updateOutput()">
+<div class="left">&#9654; <input class="box" name="value" type="number"></div>
+<div class="right">
+<select name="from" onchange="updateOutput()">
+<option value="0.001">mm</option>
+<option value="0.01">cm</option>
+<option value="1">m</option>
+<option value="1000" selected="yes">km</option>
+<option value="0.0254">inches</option>
+<option value="0.3048">feet (international)</option>
+<option value="0.3048006096">feet (US)</option>
+<option value="1609.344">miles</option>
+<option value="1852">nautical miles</option>
+<option value="0.9144">yards</option>
+</select></div>
+<br>
+
+<div class="left">= <input class="box2" name="result" type="text"></div>
+
+<div class="right"><select name="to" onchange="updateOutput()">
+<option value="0.001">mm</option>
+<option value="0.01">cm</option>
+<option value="1">m</option>
+<option value="1000">km</option>
+<option value="0.0254">inches</option>
+<option value="0.3048">feet (international)</option>
+<option value="0.3048006096">feet (US)</option>
+<option value="1609.344" selected="yes">miles</option>
+<option value="1852">nautical miles</option>
+<option value="0.9144">yards</option>
+</select></div>
+<div style="clear:both;">
+<div class="left">Thousand Separator</div>
+<div class="right"><input type="checkbox" id="separator" onchange="updateOutput()" checked></div>
+</div>
+<div class="left">Limit Decimals</div>
+<div class="right">
+<select name="decimals" onchange="updateOutput()">
+<option value="0">rounded</option>
+<option value="2" selected="yes">2</option>
+<option value="4">4</option>
+<option value="unlimited">unlimited</option>
+</select>
+</div>
+</form>
+</div>
+
+</body>
+</html>

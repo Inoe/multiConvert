@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="style.css">
+<script type="text/javascript" charset="utf-8" src="cordova-2.4.0.js"></script> 
+<script type="text/javascript">
+//Special for temperature ;)
+function SeparateThousand(n) {
+	var sRegExp = new RegExp('(-?[0-9]+)([0-9]{3})'),
+	sValue=n+'',
+	arrNum = [];
+
+	sep=',';
+	desep='.';
+
+	// split the decimal, process the integer part
+	arrNum = sValue.split(desep);
+	sValue = arrNum[0];
+
+	while(sRegExp.test(sValue)) {
+		sValue = sValue.replace(sRegExp, '$1'+sep+'$2');
+	}
+
+	// put back the decimal
+	if (arrNum.length > 1) {
+		sValue = sValue + desep + arrNum[1];
+	}
+	return sValue;
+}
+
+function updateOutput() {
+//get form
+var form = document.getElementById("convert");
+//get output
+var out = form.elements["result"];
+//get the number
+var angka = form.elements["value"].value;
+//get satuan input
+var input = form.elements["from"].value;
+//get satuan output
+var output = form.elements["to"].value;
+//get decimal limit
+var declimit = parseInt(form.elements["decimals"].value);
+
+//get it converted
+if (input == output) {
+	var result = angka*1;
+}
+else {
+	if (input == "c") {
+		if (output == "f") {
+		var result = (angka*9/5) + 32;
+		}
+		if (output == "k") {
+		var result = (angka*1) + 273.15;
+		}
+		if (output == "r") {
+		var result = angka*4/5;
+		}
+	}
+
+	if (input == "f") {
+		if (output == "c") {
+		var result = (angka - 32)*5/9;
+		}
+		if (output == "k") {
+		var result = ((angka - 32)*5/9) + 273.15;
+		}
+		if (output == "r") {
+		var result = ((angka - 32)*5/9)*4/5;
+		}
+	}
+
+	if (input == "k") {
+		if (output == "c") {
+		var result = (angka*1) - 273.15;
+		}
+		if (output == "f") {
+		var result = (((angka*1) - 273.15)*9/5) + 32;
+		}
+		if (output == "r") {
+		var result = ((angka*1) - 273.15)*4/5;
+		}
+	}
+
+	if (input == "r") {
+		if (output == "c") {
+		var result = angka*5/4;
+		}
+		if (output == "f") {
+		var result = ((angka*5/4)*9/5) + 32;
+		}
+		if (output == "k") {
+		var result = (angka*5/4) + 273.15;
+		}
+	}
+}
+
+//Set angka di belakang koma berdasar pilihan
+switch(declimit)
+	{
+	case 0: out.value = result.toFixed(0);
+	break;
+	case 2: out.value = result.toFixed(2);
+	break;
+	case 4: out.value = result.toFixed(4);
+	break;
+	default: out.value = result;
+	break;
+	}
+
+if (document.getElementById('separator').checked) {
+	out.value = SeparateThousand(out.value);
+	}
+	else {
+	out.value = out.value;
+	}
+}
+</script>
+</head>
+<body>
+
+<div class="header">
+<div class="menuimage-info"><img src="images/logo-mono.png"></div>
+<div class="headersub">Temperature</div>
+</div>
+<div class="divider"></div>
+
+<div class="content">
+<form id="convert" oninput="updateOutput()">
+<div class="left">&#9654; <input class="box" name="value" type="number"></div>
+<div class="right">
+<select name="from" onchange="updateOutput()">
+<option value="c" selected="yes">&#176;C</option>
+<option value="f">&#176;F</option>
+<option value="k">&#176;K</option>
+<option value="r">&#176;R</option>
+</select></div>
+<br>
+
+<div class="left">= <input class="box2" name="result" type="text"></div>
+
+<div class="right"><select name="to" onchange="updateOutput()">
+<option value="c">&#176;C</option>
+<option value="f" selected="yes">&#176;F</option>
+<option value="k">&#176;K</option>
+<option value="r">&#176;R</option>
+</select></div>
+<div style="clear:both;">
+<div class="left">Thousand Separator</div>
+<div class="right"><input type="checkbox" id="separator" onchange="updateOutput()" checked></div>
+</div>
+<div class="left">Limit Decimals</div>
+<div class="right">
+<select name="decimals" onchange="updateOutput()">
+<option value="0">rounded</option>
+<option value="2" selected="yes">2</option>
+<option value="4">4</option>
+<option value="unlimited">unlimited</option>
+</select>
+</div>
+</form>
+</div>
+
+</body>
+</html>
